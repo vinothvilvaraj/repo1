@@ -146,7 +146,7 @@
       <input type="radio" name="optradio" checked v-show="false">Both
       </label>
             <div class="text-right btn-group" style="float:right" role="group">
-              <button id="graphDayBTN" type="button" class="btn btn-primary" @click="graphBTNmethod('Day')" v-show="false">Day</button>
+              <button id="graphDayBTN" type="button" class="btn btn-primary" @click="graphBTNmethod('Day')">Day</button>
               <button id="graphWeekBTN" type="button" class="btn btn-primary active" @click="graphBTNmethod('Week')">Week</button>
               <button id="graphMonthBTN" type="button" class="btn btn-primary" @click="graphBTNmethod('Month')">Month</button>
             </div>
@@ -283,8 +283,8 @@
                   <img src="/static/img/images/newwindow.png" width="25" @click="openregionPopup(regionItem.REGION_ID,regionItem.REGION_NAME)" style="cursor:pointer" title="View more.."/>
                 </div>
               </div>
-             <div class="row" v-if="getregionWiseGraphJSON != ''">
-              <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj[regionItem.REGION_NAME.toLowerCase()+'detailsArray'] != undefined && getregionWiseGraphJSON.detailsObj[regionItem.REGION_NAME.toLowerCase()+'detailsArray_count'] != 0">
+              <div class="row" v-if="getregionWiseGraphJSON != ''">
+              <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj[regionItem.REGION_NAME.toLowerCase()+'detailsArray'] != undefined">
               <apexchart
                 width="100%"
                 height="200"
@@ -293,11 +293,91 @@
                 :series="getregionWiseGraphJSON.detailsObj[regionItem.REGION_NAME.toLowerCase()+'detailsArray']"
               ></apexchart>
                    </div>
-                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj[regionItem.REGION_NAME.toLowerCase()+'detailsArray'] != undefined && getregionWiseGraphJSON.detailsObj[regionItem.REGION_NAME.toLowerCase()+'detailsArray_count'] == 0">
-                    <div class="col-lg-12 text-center">
-                           <span>No Records Found</span>
-                    </div>
+
+
+
+<!--                   
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.chennaisouthdetailsArray != undefined && index == 1">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.chennaisouthdetailsArray"
+              ></apexchart>
                    </div>
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.coimbatoredetailsArray != undefined && index == 2">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.coimbatoredetailsArray"
+              ></apexchart>
+                   </div>
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.erodedetailsArray != undefined && index == 3">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.erodedetailsArray"
+              ></apexchart>
+                   </div>
+                  <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.maduraidetailsArray != undefined && index == 4">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.maduraidetailsArray"
+              ></apexchart>
+                   </div>
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.tirunelvelidetailsArray != undefined && index == 5">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.tirunelvelidetailsArray"
+              ></apexchart>
+                   </div>
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.trichydetailsArray != undefined && index == 6">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.trichydetailsArray"
+              ></apexchart>
+                   </div>
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.velloredetailsArray != undefined && index == 7">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.velloredetailsArray"
+              ></apexchart>
+                   </div>
+                   <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.villupuramdetailsArray != undefined && index == 8">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line"
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.villupuramdetailsArray"
+              ></apexchart>
+                   </div>
+                    <div class="col-lg-12 col-xs-12" v-if="getregionWiseGraphJSON.detailsObj.wedcdetailsArray != undefined && index == 9">
+              <apexchart
+                width="100%"
+                height="200"
+                type="line" 
+                :options="regionwisedataoptions"
+                :series="getregionWiseGraphJSON.detailsObj.wedcdetailsArray"
+              ></apexchart>
+                   </div> -->
                 </div>
             </div>
               </div>
@@ -438,7 +518,7 @@
                             </div>
                            <div class="col-lg-6 text-right" v-show="getsubstationArrayseries.length != 0">
                <div class="btn-group"  role="group">
-              <button id="sschartDayBTN" type="button" class="btn btn-primary" @click="sschartBTNmethod('Day')" v-show="false">Day</button>
+              <button id="sschartDayBTN" type="button" class="btn btn-primary" @click="sschartBTNmethod('Day')">Day</button>
               <button id="sschartWeekBTN" type="button" class="btn btn-primary active" @click="sschartBTNmethod('Week')">Week</button>
               <button id="sschartMonthBTN" type="button" class="btn btn-primary" @click="sschartBTNmethod('Month')">Month</button>
               </div>
@@ -683,8 +763,6 @@ export default {
       dataAvlgraphmonthAvgPerTime:'',
       updateRegionID:null,
       updateCircleID:null,
-      selectSSDcuStatus:'',
-      bottomlevelssJSONArray:[],
       selectSSObject:'',
       updateSubstationID:null,
       heatmapArrayList: [
@@ -729,47 +807,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
-          // formatter: function(value, timestamp) {
-          //   var today = new Date(timestamp);
-          //   var yyyy = today.getFullYear();
-          //   var mm = today.getMonth();
-          //   var dd = today.getDate();
-          //   var hh = today.getHours();
-          //   var min = today.getMinutes();
-          //   var sec = today.getSeconds();
-          //   //  if (mm < 10) {mm = "0" + mm;}
-          //   if (dd < 10) {
-          //     dd = "0" + dd;
-          //   }
-          //   if (hh < 10) {
-          //     hh = "0" + hh;
-          //   }
-          //   if (min < 10) {
-          //     min = "0" + min;
-          //   }
-          //   if (sec < 10) {
-          //     sec = "0" + sec;
-          //   }
-          //   // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
-          //   var monthlimt = [
-          //     "Jan",
-          //     "Feb",
-          //     "Mar",
-          //     "Apr",
-          //     "May",
-          //     "Jun",
-          //     "Jul",
-          //     "Aug",
-          //     "Sep",
-          //     "Oct",
-          //     "Nov",
-          //     "Dec"
-          //   ];
-          //   var date = dd + " " + monthlimt[Number(mm)];
-          //   return date;
-          // }
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
       legend: {
@@ -1005,8 +1082,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-           format: 'dd MMM',
           //  format: 'HH:mm',
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
          dropShadow: {
@@ -1090,8 +1205,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
        colors: ["#032457", "#049f82"],
@@ -1260,47 +1413,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
-          // formatter: function(value, timestamp) {
-          //   var today = new Date(timestamp);
-          //   var yyyy = today.getFullYear();
-          //   var mm = today.getMonth();
-          //   var dd = today.getDate();
-          //   var hh = today.getHours();
-          //   var min = today.getMinutes();
-          //   var sec = today.getSeconds();
-          //   //  if (mm < 10) {mm = "0" + mm;}
-          //   if (dd < 10) {
-          //     dd = "0" + dd;
-          //   }
-          //   if (hh < 10) {
-          //     hh = "0" + hh;
-          //   }
-          //   if (min < 10) {
-          //     min = "0" + min;
-          //   }
-          //   if (sec < 10) {
-          //     sec = "0" + sec;
-          //   }
-          //   // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
-          //   var monthlimt = [
-          //     "Jan",
-          //     "Feb",
-          //     "Mar",
-          //     "Apr",
-          //     "May",
-          //     "Jun",
-          //     "Jul",
-          //     "Aug",
-          //     "Sep",
-          //     "Oct",
-          //     "Nov",
-          //     "Dec"
-          //   ];
-          //   var date = dd + " " + monthlimt[Number(mm)];
-          //   return date;
-          // }
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
        colors: ["#032457", "#049f82"],
@@ -1513,12 +1665,11 @@ export default {
        this.isLoading = true;
        axios.get(getoverall_graph_listURL).then(response => {
         if (response.data.status == "found") {
-          // this.overallGraphdataoptions = {};
-          // if(btnName == "Day"){
-          //   this.overallGraphdataoptions  = this.dailyoverallGraphdataoptions;
-          // }else {
-          //   this.overallGraphdataoptions  = this.monthoverallGraphdataoptions;
-          // }
+          if(btnName == "Day"){
+            this.overallGraphdataoptions  = this.dailyoverallGraphdataoptions;
+          }else {
+            this.overallGraphdataoptions  = this.monthoverallGraphdataoptions;
+          }
           this.overallGraphdataseries.push(response.data.convObj);
           this.overallGraphdataseries.push(response.data.dataavlObj);
           this.isLoading = false;

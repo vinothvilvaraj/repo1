@@ -157,8 +157,8 @@
                                 <option value='OD_BILLING_MESSAGE'>OD_BILLING_MESSAGE</option>
                                 <option value='RESET'>RESET</option>
                                 <option value='TIME_SYNC'>TIME_SYNC</option>
-                                <option value='SET_IP_ADDRESS'>SET_IP_ADDRESS</option>
-                                <option value='SET_BLOCK_INTEGRATION_PERIOD'>SET_BLOCK_INTEGRATION_PERIOD</option>
+                                <option value='SET_IP_ADDRESS' v-show="false">SET_IP_ADDRESS</option>
+                                <option value='SET_BLOCK_INTEGRATION_PERIOD' v-show="false">SET_BLOCK_INTEGRATION_PERIOD</option>
 															</select>
               </div>
             </div>
@@ -171,15 +171,6 @@
                <div style="height:31px;padding-top:4px;">
                 <datepicker v-model="demandFromdateTXT" :disabledDates="disabledDates" style="width:100%"></datepicker>
                 </div>
-              </div>
-            </div>
-            <p v-show="onDemandCommandTXT == 'SET_IP_ADDRESS'"> </p>
-            <div class="row" v-show="onDemandCommandTXT == 'SET_IP_ADDRESS'">
-              <div class="col-lg-4">
-                <p>IP Address :</p>
-              </div>
-              <div class="col-lg-8 text-left">
-                <input id="setIPADDTXT" class="inputTEXTcss" placeholder="Enter IP Address" v-model="setIPADDTXT"/>
               </div>
             </div>
             <p></p>
@@ -568,7 +559,6 @@ export default {
       ondemandTimeSyncArr:['10','20','30','40','50','60'],
       ondemandTimeSyncTXT:'10',
       ondemandBlockPeroidTXT:'5',
-      setIPADDTXT:'',
       ondemandTimeSyncSELVal:'Advance',
       commandListTblSTOP:null,
       commandOD_MSGJSON:'',
@@ -590,7 +580,6 @@ export default {
       odoptionArray:[],
       odOptionTxt:'Choose Option',
       odRegionTXT:'Choose Region',
-      odCircleTXT:'Choose Circle',
       odDeviceTXT:'Choose Device',
       odregionListArray:[],
       odcircleListArray:[],
@@ -864,7 +853,6 @@ export default {
       this.ondemandDeviceSerialTXT = "Choose Serial Number";
       this.ondemandReasonTXT = "";
       this.ondemandBlockPeroidTXT = "5";
-      this.setIPADDTXT = "";
       this.$modal.show('rmsondemandConfigModal');
       clearInterval(this.commandListTblSTOP);
     },
@@ -886,20 +874,6 @@ export default {
         this.warningMessage("Please choose any one command name");
         this.isLoading = false;
         return false;
-      }
-      if(this.onDemandCommandTXT == 'OD_LS_MESSAGE'){
-      if(this.demandFromdateTXT == ''){
-        this.warningMessage("Please choose date.");
-        this.isLoading = false;
-        return false;
-      }
-      }
-      if(this.onDemandCommandTXT == 'SET_IP_ADDRESS'){
-      var bool22 = this.ValidateIPaddress(this.setIPADDTXT);
-      if (!bool22) {
-        this.isLoading = false;
-        return false;
-      }
       }
       if(this.ondemandRegionNameTXT == "Choose Region"){
         this.warningMessage("Please choose any one region name");
@@ -932,6 +906,13 @@ export default {
       //  return false;
       //  }
 
+      if(this.onDemandCommandTXT == 'OD_LS_MESSAGE'){
+      if(this.demandFromdateTXT == ''){
+        this.warningMessage("Please choose date.");
+        this.isLoading = false;
+        return false;
+      }
+      }
      if(this.ondemandReasonTXT == ""){
         this.warningMessage("Please enter command reason and proceed further.");
         this.isLoading = false;
@@ -962,7 +943,6 @@ export default {
           dcu_name: dcuName,
           meter_id:meterId,
           meter_name:meterName,
-          set_ip_address:this.setIPADDTXT,
           time_sync_step:this.ondemandTimeSyncTXT,
           time_sync_drift:this.ondemandTimeSyncSELVal,
           block_period:this.ondemandBlockPeroidTXT,
@@ -1056,16 +1036,28 @@ export default {
         this.imgvalue2 = "static/img/images/Peye1.png";
       }
     },
-    ValidateIPaddress(inputText) {
+    ValidateIPaddress(whichmsg,inputText) {
       var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
      if(inputText == "" || inputText == null){
-       this.warningMessage("please enter IP address.");
+       this.warningMessage("please enter a"+whichmsg.replace("in","").replace("IP is","")+" IP address.");
        return false;
      }else{
        if (inputText.match(ipformat)) {
         return true;
       } else {
-        this.warningMessage("You have entered IP address is invalid IP address! ");
+        this.warningMessage("You have entered "+whichmsg+" invalid IP address! ");
+        return false;
+      }
+     }
+    },
+    ValidateDBGIPaddress(whichmsg,inputText) {
+      var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+     if(inputText == "" || inputText == null){
+       return false;
+     }else{
+       if (inputText.match(ipformat)) {
+        return true;
+      } else {
         return false;
       }
      }

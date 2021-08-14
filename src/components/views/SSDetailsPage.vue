@@ -284,9 +284,9 @@
                                         <th style="width: 80px;">I3</th>
                                         <th style="width: 80px;">PF</th>
                                         <th style="width: 80px;">Freq</th>
-                                        <th style="width: 80px;">W</th>
-                                        <th style="width: 80px;">VAR</th>
-                                        <th style="width: 80px;">VA</th>
+                                        <th style="width: 80px;">KW</th>
+                                        <th style="width: 80px;">KVAR</th>
+                                        <th style="width: 80px;">KVA</th>
                                         <th style="width:150px">Meter Time</th>
                                         <th style="width:150px">Drift Time <br/>(hh:mm:ss)</th>
                                         <th style="width:150px">Status</th>
@@ -374,9 +374,9 @@
                                         <th style="width: 80px;">I3</th>
                                         <th style="width: 80px;">PF</th>
                                         <th style="width: 80px;">Freq</th>
-                                        <th style="width: 80px;">W</th>
-                                        <th style="width: 80px;">VAR</th>
-                                        <th style="width: 80px;">VA</th>
+                                        <th style="width: 80px;">KW</th>
+                                        <th style="width: 80px;">KVAR</th>
+                                        <th style="width: 80px;">KVA</th>
                                          <th style="width:150px">Meter Time</th>
                                         <th style="width:150px">Drift Time <br/>(hh:mm:ss)</th>
                                         <th style="width:150px">Status</th>
@@ -535,8 +535,8 @@
                                         <th>RI</th>
                                         <th>AE</th>
                                         <th>RE</th>
-                                        <th>VARH_LEAD</th>
-                                        <th>VARH_LAG</th>
+                                        <th>KVARH_LEAD</th>
+                                        <th>KVARH_LAG</th>
                                         <th>I1</th>
                                         <th>I2</th>
                                         <th>I3</th>
@@ -662,16 +662,16 @@
                                           <tr>
                                             <th>S.No</th>
                                             <th style="width:160px">Date</th>
-                                            <th>WH_IMP</th>
-                                            <th>WH_EXP</th>
-                                            <th>VAH_IMP</th>
-                                            <th>VAH_EXP</th>
+                                            <th>KWH_IMP</th>
+                                            <th>KWH_EXP</th>
+                                            <th>KVAH_IMP</th>
+                                            <th>KVAH_EXP</th>
                                             <th>RE_High</th>
                                             <th>RE_Low</th>
-                                            <th>VARH_Q1</th>
-                                            <th>VARH_Q2</th>
-                                            <th>VARH_Q3</th>
-                                            <th>VARH_Q4</th>
+                                            <th>KVARH_Q1</th>
+                                            <th>KVARH_Q2</th>
+                                            <th>KVARH_Q3</th>
+                                            <th>KVARH_Q4</th>
                                           </tr>
                                         </thead>
                                         <tbody v-if="midNightDataTblJSON != ''">
@@ -739,11 +739,12 @@
                                     </select>
                                   </div>
                                  <div class="col-lg-2">
+                                    
                                   </div>
                                     <div class="col-lg-3">
                                     <div class="btn-group" style="float:right" role="group">
                                       <button
-                                        id="ssloadcurveDailykBTN" v-show="false"
+                                        id="ssloadcurveDailykBTN"
                                         type="button" @click="substationLoadcurveBTN('Day')"
                                         class="btn btn-sm btn-primary"
                                       >D</button>
@@ -784,7 +785,7 @@
                                   >Cumulative Curve - All Incomer & Outgoing</h3>
                                   <div class="btn-group" style="float:right" role="group">
                                     <button
-                                      id="sscumulativecurveDailyBTN" v-show="false"
+                                      id="sscumulativecurveDailyBTN"
                                       type="button" @click="substationCumulativecurveBTN('Day')"
                                       class="btn btn-sm btn-primary"
                                     >D</button>
@@ -947,7 +948,7 @@
                                             <th>V1</th>
                                             <th>V2</th>
                                             <th>V3</th>
-                                            <th>WH</th>
+                                            <th>KWH</th>
                                           </tr>
                                         </thead>
                                         <tbody v-if="eventsDataTblJSON != ''">
@@ -1608,7 +1609,7 @@
                     <option value="bar">Bar</option>
                   </select>&nbsp;
                   <div class="btn-group" style="float:right" role="group">
-                    <button id="ssconncurveDailyBTN" type="button" class="btn btn-sm btn-primary" @click="markerConvBTN('Day')" v-show="false">D</button>
+                    <button id="ssconncurveDailyBTN" type="button" class="btn btn-sm btn-primary" @click="markerConvBTN('Day')">D</button>
                     <button id="ssconncurveWeekBTN"  type="button" class="btn btn-sm btn-primary active" @click="markerConvBTN('Week')" >W</button>
                     <button id="ssconncurveMonthBTN" type="button" class="btn btn-sm btn-primary" @click="markerConvBTN('Month')">M</button>
                   </div>&nbsp;&nbsp;
@@ -2022,47 +2023,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
-          // formatter: function(value, timestamp) {
-          //   var today = new Date(timestamp);
-          //   var yyyy = today.getFullYear();
-          //   var mm = today.getMonth();
-          //   var dd = today.getDate();
-          //   var hh = today.getHours();
-          //   var min = today.getMinutes();
-          //   var sec = today.getSeconds();
-          //   //  if (mm < 10) {mm = "0" + mm;}
-          //   if (dd < 10) {
-          //     dd = "0" + dd;
-          //   }
-          //   if (hh < 10) {
-          //     hh = "0" + hh;
-          //   }
-          //   if (min < 10) {
-          //     min = "0" + min;
-          //   }
-          //   if (sec < 10) {
-          //     sec = "0" + sec;
-          //   }
-          //   // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
-          //   var monthlimt = [
-          //     "Jan",
-          //     "Feb",
-          //     "Mar",
-          //     "Apr",
-          //     "May",
-          //     "Jun",
-          //     "Jul",
-          //     "Aug",
-          //     "Sep",
-          //     "Oct",
-          //     "Nov",
-          //     "Dec"
-          //   ];
-          //   var date = dd + " " + monthlimt[Number(mm)];
-          //   return date;
-          // }
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
          dropShadow: {
@@ -2146,47 +2146,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
-          // formatter: function(value, timestamp) {
-          //   var today = new Date(timestamp);
-          //   var yyyy = today.getFullYear();
-          //   var mm = today.getMonth();
-          //   var dd = today.getDate();
-          //   var hh = today.getHours();
-          //   var min = today.getMinutes();
-          //   var sec = today.getSeconds();
-          //   //  if (mm < 10) {mm = "0" + mm;}
-          //   if (dd < 10) {
-          //     dd = "0" + dd;
-          //   }
-          //   if (hh < 10) {
-          //     hh = "0" + hh;
-          //   }
-          //   if (min < 10) {
-          //     min = "0" + min;
-          //   }
-          //   if (sec < 10) {
-          //     sec = "0" + sec;
-          //   }
-          //   // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
-          //   var monthlimt = [
-          //     "Jan",
-          //     "Feb",
-          //     "Mar",
-          //     "Apr",
-          //     "May",
-          //     "Jun",
-          //     "Jul",
-          //     "Aug",
-          //     "Sep",
-          //     "Oct",
-          //     "Nov",
-          //     "Dec"
-          //   ];
-          //   var date = dd + " " + monthlimt[Number(mm)];
-          //   return date;
-          // }
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
          dropShadow: {
@@ -2279,47 +2278,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
-          // formatter: function(value, timestamp) {
-          //   var today = new Date(timestamp);
-          //   var yyyy = today.getFullYear();
-          //   var mm = today.getMonth();
-          //   var dd = today.getDate();
-          //   var hh = today.getHours();
-          //   var min = today.getMinutes();
-          //   var sec = today.getSeconds();
-          //   //  if (mm < 10) {mm = "0" + mm;}
-          //   if (dd < 10) {
-          //     dd = "0" + dd;
-          //   }
-          //   if (hh < 10) {
-          //     hh = "0" + hh;
-          //   }
-          //   if (min < 10) {
-          //     min = "0" + min;
-          //   }
-          //   if (sec < 10) {
-          //     sec = "0" + sec;
-          //   }
-          //   // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
-          //   var monthlimt = [
-          //     "Jan",
-          //     "Feb",
-          //     "Mar",
-          //     "Apr",
-          //     "May",
-          //     "Jun",
-          //     "Jul",
-          //     "Aug",
-          //     "Sep",
-          //     "Oct",
-          //     "Nov",
-          //     "Dec"
-          //   ];
-          //   var date = dd + " " + monthlimt[Number(mm)];
-          //   return date;
-          // }
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
          dropShadow: {
@@ -2517,47 +2515,46 @@ export default {
         type: "datetime",
         labels: {
           show: true,
-          format: 'dd MMM',
           //  format: 'HH:mm',
-          // formatter: function(value, timestamp) {
-          //   var today = new Date(timestamp);
-          //   var yyyy = today.getFullYear();
-          //   var mm = today.getMonth();
-          //   var dd = today.getDate();
-          //   var hh = today.getHours();
-          //   var min = today.getMinutes();
-          //   var sec = today.getSeconds();
-          //   //  if (mm < 10) {mm = "0" + mm;}
-          //   if (dd < 10) {
-          //     dd = "0" + dd;
-          //   }
-          //   if (hh < 10) {
-          //     hh = "0" + hh;
-          //   }
-          //   if (min < 10) {
-          //     min = "0" + min;
-          //   }
-          //   if (sec < 10) {
-          //     sec = "0" + sec;
-          //   }
-          //   // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
-          //   var monthlimt = [
-          //     "Jan",
-          //     "Feb",
-          //     "Mar",
-          //     "Apr",
-          //     "May",
-          //     "Jun",
-          //     "Jul",
-          //     "Aug",
-          //     "Sep",
-          //     "Oct",
-          //     "Nov",
-          //     "Dec"
-          //   ];
-          //   var date = dd + " " + monthlimt[Number(mm)];
-          //   return date;
-          // }
+          formatter: function(value, timestamp) {
+            var today = new Date(timestamp);
+            var yyyy = today.getFullYear();
+            var mm = today.getMonth();
+            var dd = today.getDate();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            //  if (mm < 10) {mm = "0" + mm;}
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+            if (hh < 10) {
+              hh = "0" + hh;
+            }
+            if (min < 10) {
+              min = "0" + min;
+            }
+            if (sec < 10) {
+              sec = "0" + sec;
+            }
+            // var date = yyyy + "-" + mm + "-" + dd +" : "+ hh +":"+ min + ":"+ sec;
+            var monthlimt = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ];
+            var date = dd + " " + monthlimt[Number(mm)];
+            return date;
+          }
         }
       },
          dropShadow: {
@@ -3540,10 +3537,10 @@ export default {
             name:"RI", data:loadsurveyRIgrphArr
           },
           {
-            name:"VARH LEAD", data:loadsurveyKVAR_LEADgrphArr
+            name:"KVARH LEAD", data:loadsurveyKVAR_LEADgrphArr
           },
           {
-            name:"VARH LAG", data:loadsurveyKVAR_LAGgrphArr
+            name:"KVARH LAG", data:loadsurveyKVAR_LAGgrphArr
           }
           ];
           // console.log('this.loadsurveyseries :', JSON.stringify(this.loadsurveyseries));
@@ -3599,11 +3596,11 @@ export default {
       var substation_loadcurve_summaryURL = this.substation_loadcurve_summaryURL.replace("$$dcuid$$", selectSSDucID).replace("$$feedername$$", feederName).replace("$$btnname$$",loadcurveBTNname).replace("$$startdate$$", this.changeYYYYDDMMFORMAT(startdate)).replace("$$enddate$$", this.changeYYYYDDMMFORMAT(enddate));
       axios.get(substation_loadcurve_summaryURL).then(response => {
         if (response.data.status == "found") {
-          // if(loadcurveBTNname == "Day"){
-          //   this.loadcurveoptions = this.dailychartloadcurveOptions;
-          // }else {
-          //    this.loadcurveoptions = this.monthchartloadcurveOptions;
-          // }
+          if(loadcurveBTNname == "Day"){
+            this.loadcurveoptions = this.dailychartloadcurveOptions;
+          }else {
+             this.loadcurveoptions = this.monthchartloadcurveOptions;
+          }
           this.loadcurveseries = response.data.details;
           this.isLoading = false;
         } else {
@@ -3617,11 +3614,11 @@ export default {
       var substation_cumulativecurve_summaryURL = this.substation_cumulativecurve_summaryURL.replace("$$dcuid$$", selectSSDucID).replace("$$startdate$$", this.changeYYYYDDMMFORMAT(startdate)).replace("$$enddate$$", this.changeYYYYDDMMFORMAT(enddate));
       axios.get(substation_cumulativecurve_summaryURL).then(response => {
         if (response.data.status == "found") {
-        // if(cumulativecurveBTNname == "Day"){
-        //     this.cumulativecurveoptions = this.dailychartcumulativecurveOptions;
-        //   }else {
-        //      this.cumulativecurveoptions = this.monthchartcumulativecurveOptions;
-        //   }
+        if(cumulativecurveBTNname == "Day"){
+            this.cumulativecurveoptions = this.dailychartcumulativecurveOptions;
+          }else {
+             this.cumulativecurveoptions = this.monthchartcumulativecurveOptions;
+          }
           this.cumulativecurveseries = response.data.details;
           this.isLoading = false;
         } else {
@@ -3860,7 +3857,7 @@ formatDateOnly(dateval) {
     return days + " days, " + hours + " hrs, " + minutes + " mins";
   },
     userIDblockSpecialChar(e) {
-      var keyCode = e.which;
+      var keyCode = e.which; 
       if (
         !(
           (keyCode >= 65 && keyCode <= 90) ||
